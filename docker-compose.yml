@@ -1,0 +1,14 @@
+version: "3.4"
+services:
+  api:
+    build:
+      context: .
+      target: dev
+    container_name: api
+    volumes:
+      - .:/go/src/${PROJECT_PATH}
+    working_dir: /go/src/${PROJECT_PATH}
+    command: realize start
+    entrypoint: ./entrypoint.sh
+    ports:
+      - 8080:8080
