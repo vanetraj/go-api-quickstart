@@ -4,11 +4,23 @@ services:
     build:
       context: .
       target: dev
+      args:
+        - GO_VERSION:${GO_VERSION}
     container_name: api
     volumes:
       - .:/go/src/${PROJECT_PATH}
     working_dir: /go/src/${PROJECT_PATH}
     command: realize start
     entrypoint: ./entrypoint.sh
+    ports:
+      - 8080:8080
+
+  api_release:
+    build:
+      context: .
+      target: release
+      args:
+        - GO_VERSION:${GO_VERSION}
+    image: ${PROJECT_NAME}
     ports:
       - 8080:8080
